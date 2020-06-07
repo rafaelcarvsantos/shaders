@@ -1,0 +1,22 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+vec3 criaCirculo(vec2 center, float radius, vec2 uv){
+	
+	vec3 col = vec3(step(distance(uv,center),radius));
+	return col;
+	
+}
+
+
+void fragment() {
+	vec3 col = criaCirculo(vec2(0.5,0.5),0.1,UV);
+	
+	COLOR = vec4(col,1.0);
+
+}"
+
+[resource]
+shader = SubResource( 1 )
