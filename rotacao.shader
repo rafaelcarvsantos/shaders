@@ -19,11 +19,21 @@ mat2 rotate2d(vec2 uv,float t){
 
 
 void fragment() {
-	vec2 st = UV-vec2(0.5,0.5);
+	vec2 st = (UV-vec2(0.2))*2.0-vec2(0.5,0.5);
 	st = rotate2d(st,sin(TIME*1.5)*9.0) * st;
 	st = st+vec2(0.5,0.5);
+
 	st.y=st.y+0.4*sin(TIME);
-	vec3 col = criaQuadrado(vec2(0.5,0.5),0.1,st);
+	
+	vec3 col = criaQuadrado(vec2(0.5,0.5),0.05,st);
+	st = st - vec2(0.1,0.1);
+	st = rotate2d(st,sin(TIME))*st;
+
+	
+	col = col + criaQuadrado(vec2(0.1,0.1),0.05,st);
+	col = col + criaQuadrado(vec2(0.6,0.6),0.05,st);
+	col = col + criaQuadrado(vec2(0.3,0.3),0.05,st);
+	col = col + criaQuadrado(vec2(0.5,0.1),0.05,st);
 	//col = col+ criaQuadrado(vec2(0.1,0.3),0.1,st);
 	
 	COLOR = vec4(col,1.0);
