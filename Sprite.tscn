@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://New Piskel-1.png.png" type="Texture" id=1]
+[ext_resource path="res://Leg.gd" type="Script" id=2]
+[ext_resource path="res://Leg2.gd" type="Script" id=3]
+[ext_resource path="res://Torso.gd" type="Script" id=4]
+
+[node name="Node2D" type="Node2D"]
+position = Vector2( 188.622, 190.337 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.411377, -15.1071 )
+texture = ExtResource( 1 )
+offset = Vector2( 0.411377, 15.1071 )
+script = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+position = Vector2( -0.411377, -15.1071 )
+texture = ExtResource( 1 )
+offset = Vector2( 0.411377, 15.1071 )
+script = ExtResource( 3 )
+
+[node name="Sprite3" type="Sprite" parent="."]
+position = Vector2( -0.0558472, -16.7155 )
+scale = Vector2( 1, 0.5 )
+texture = ExtResource( 1 )
+offset = Vector2( 0.511108, -9.17517 )
+script = ExtResource( 4 )
+
+[node name="Sprite4" type="Sprite" parent="."]
+position = Vector2( 3.96355, -28.1955 )
+scale = Vector2( 1, 0.6 )
+texture = ExtResource( 1 )
+normal_map = ExtResource( 1 )
+offset = Vector2( 0.542648, 14.4477 )
+script = ExtResource( 2 )
+
+[node name="Sprite5" type="Sprite" parent="."]
+position = Vector2( 3.96355, -28.1955 )
+scale = Vector2( 1, 0.6 )
+texture = ExtResource( 1 )
+normal_map = ExtResource( 1 )
+offset = Vector2( 0.542648, 14.4477 )
+script = ExtResource( 3 )
