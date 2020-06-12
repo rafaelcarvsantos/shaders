@@ -21,7 +21,7 @@ void fragment() {
 	vec3 cor = vec3(0.0);
 	vec2 st = UV *32.0;
 
-//st.x += step(1.0, mod(st.y,2.0)) * 0.5;
+	st.x += step(1.0, mod(st.y,2.0)) * .5;
 	//st =rotate2D(st, 0.5*3.14*step(1.0,mod(st.y,2.0)));
 
 	if (step(1.0,mod(st.y,2.0)) == 1.0){
