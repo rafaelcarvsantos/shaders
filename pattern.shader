@@ -20,9 +20,9 @@ float sawtooth(float valor){
 void fragment() {
 	vec3 cor = vec3(0.0);
 	vec2 st = UV *32.0;
-
-	st.x += step(1.0, mod(st.y,2.0)) * .5;
-	//st =rotate2D(st, 0.5*3.14*step(1.0,mod(st.y,2.0)));
+	
+	st.x += step(1.0, mod(st.y,2.0)) * .5*TIME;
+	st =rotate2D(st, 0.5*3.14*step(1.0,mod(st.y,2.0)));
 
 	if (step(1.0,mod(st.y,2.0)) == 1.0){
 		st.y=-st.y;
@@ -33,7 +33,7 @@ void fragment() {
 	
 	
 	st=fract(st);
-	//st=rotate2D(st,TIME);
+	st=rotate2D(st,TIME);
 
 	vec3 col = criaTriangulo(st);
 	

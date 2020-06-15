@@ -4,11 +4,76 @@
 [ext_resource path="res://Leg.gd" type="Script" id=2]
 [ext_resource path="res://Leg2.gd" type="Script" id=3]
 [ext_resource path="res://Torso.gd" type="Script" id=4]
-[ext_resource path="res://random.shader" type="Shader" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 5 )
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+
+vec3 criaQuadrado(vec2 center, float radius, vec2 uv){
+	
+	float l = step(uv.x-radius,center.x);
+	float r=  step(center.x,uv.x+radius);
+	float t = step(uv.y-radius,center.y);
+	float b=  step(center.y,uv.y+radius);
+	
+	vec3 col = vec3(l*r*t*b);
+	return col;
+	
+}
+
+float random (vec2 st) {
+    return fract(sin(dot(st,
+                         vec2(12.9898,78.233)))*
+        43758.5453123);
+}
+
+
+vec2 rotate2D (vec2 st, float angle, vec2 center) {
+    st.x -= center.x;
+	st.y -= center.y;
+    st =  mat2(vec2(cos(angle),-sin(angle)),
+                vec2(sin(angle),cos(angle))) * st;
+    st.x += center.x;
+	st.y += center.y;
+    return st;
+}
+
+vec2 scale (vec2 st, float size, vec2 center){
+	st.x -= center.x;
+	st.y -= center.y;
+    st = st/size;
+    st.x += center.x;
+	st.y += center.y;
+    return st;
+	
+}
+
+float noise (float x){
+	float i = floor(x);
+	float f = fract(x);
+	return clamp(mix(random (vec2(i,i)),random(vec2(i,i)+vec2(1.0)),smoothstep(0.0,1.0,f)),0.0,1.0);
+}
+
+
+
+void fragment() {
+	vec2 st = rotate2D(UV,3.15*noise(TIME),vec2(0.5,0.5));
+	vec2 st1 = rotate2D(st,3.14*noise(TIME),vec2(0.5,0.5));
+	
+	vec3 col = criaQuadrado(vec2(0.5,0.5),0.1,st1);
+	
+	vec2 st2 = rotate2D(st,noise(TIME/0.2),vec2(0.3,0.3));
+	st2 = scale(st2,noise(TIME)*1.5,vec2(0.3,0.3));
+	col = col + criaQuadrado(vec2(0.3,0.3),0.1,st2);
+
+	//col = col * vec3(noise(st.y*TIME*5.0));
+	COLOR = vec4(col,1.0);
+
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 
 [node name="Node2D" type="Node2D"]
 position = Vector2( 188.622, 190.337 )
@@ -56,7 +121,7 @@ script = ExtResource( 3 )
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Node2D"]
-material = SubResource( 1 )
-position = Vector2( 1554.31, 835.443 )
+material = SubResource( 2 )
+position = Vector2( 1645.38, 1008.09 )
 scale = Vector2( 23.1176, 17.2727 )
 texture = ExtResource( 6 )
