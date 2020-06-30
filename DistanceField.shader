@@ -10,6 +10,8 @@ vec3 criaDistanceField(vec2 center, float radius, vec2 uv, float time){
  
 void fragment() {
 	vec2 st = UV *4.0;
+	st = st+vec2(0.5)*4.0;
+	st = fract(st);
 	
 	vec3 col = criaDistanceField(vec2(0.5,0.5),0.02*abs(sin(TIME)),st,TIME);
 	col = col + criaDistanceField(vec2(0.1,0.1),0.02*abs(sin(TIME)),st,TIME);
